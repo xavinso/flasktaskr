@@ -1,4 +1,4 @@
-from project import db
+from views import db
 import datetime
 
 
