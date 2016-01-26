@@ -1,16 +1,16 @@
-# specify language
 language:
 - python
-
-# specify python version(s)
 python:
-- "3.4"
-- "2.7"
-
-# install dependencies
+- '3.4'
+- '2.7'
 install:
 - pip install -r requirements.txt
-
-# run tests
 script:
 - nosetests
+deploy:
+  provider: heroku
+  api_key:
+    secure: csgbVLjPt93J9kXfFjhI53+305w3vCka79kEYj7RSfopA3X8IjClMOTysofZebXgVWxCuKh8AOFjY46dW/9p+4z2Yih0JThKylsUmKKqXoY4+/1qPRNLm5yq4AmZmY7plUPhYa/x9cgOzfs/EZc3UMcpogA48NG8tU8WBc3YB0q0u6HR5j0GegSTFHDUhOxPsHxqj9s8H0azDFlXiIUbeTVc/B6//gXzysdiy7KJkF/CCwiwdNIID5ukkE7xfUb2sQEJvU8ncHo9qm6AoGXpt0RfdRIQP4salcvW9rVFtlg4i88V+JmLY2mV36ZuIcE3oeiVQWTBFZd+qlC3wb6RLyEJrYIJ55UR2JOCFgZybfReGsbI2hLtghA6Ah3G9wcWnv+iwkhq1kW4OO3heDGvJZKy1REUL21kEs2u0MT6Po3kv+IlJ0Rchze4XA5NLvTa6DwKfrrXMelFDWFMZUnAkhcIu8Fs8kE1CjHJzagro5DsswZC2EfG9+PCwMEdKSAVHyD/ELeQiEvjpC5NWpvBLnorDOgf5khGy69jmAoaHXUO9KB5Ym5eIn0TNQLdeUGYY5qIwmoxSNVnpVCP6ahZRKeYoiO24Bgu0Sli6URIbiDNzBSIh38ohCr7orA0qqSZ6dp/8hDklZUpH7IY8uuCvs4KyCYkOKXp+UXY5QZVJ+4=
+  app: frozen-refuge-59696
+  on:
+    repo: xavinso/flasktaskr
