@@ -19,7 +19,6 @@ app.register_blueprint(api_blueprint)
 
 
 def log_error(code, url):
-    print app.debug
     if app.debug is not True:
         now = datetime.datetime.now()
         with open('error.log', 'a') as f:
