@@ -3,7 +3,7 @@ import unittest
 
 from project import app, db, bcrypt
 from project._config import basedir
-from project.models import User
+from project.models import User, Task
 
 TEST_DB = 'test.db'
 
@@ -23,7 +23,7 @@ class AllTests(unittest.TestCase):
         db.create_all()
         self.db = db
         self.User = User
-
+        self.Task = Task
         self.assertEquals(app.debug, False)
 
     # executed after each test
