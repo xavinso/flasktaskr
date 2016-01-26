@@ -2,3 +2,5 @@
 404 error at 25-01-2016 16:34:42: http://127.0.0.1:5000/tasks/latex
 404 error at 25-01-2016 16:34:52: http://127.0.0.1:5000/tasks/latex
 404 error at 25-01-2016 16:35:07: http://127.0.0.1:5000/tasks/latex
+404 error at 25-01-2016 18:38:02: http://localhost/this-route-does-not-exist/
+404 error at 25-01-2016 18:39:08: http://localhost/this-route-does-not-exist/
