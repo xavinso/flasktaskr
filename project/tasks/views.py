@@ -1,6 +1,7 @@
 import datetime
 from functools import wraps
-from flask import flash, redirect, render_template, request, session, url_for, Blueprint
+from flask import flash, redirect, render_template, request, session, url_for
+from flask import Blueprint
 
 from .forms import AddTaskForm
 from project import db
@@ -39,6 +40,7 @@ def closed_tasks():
 def tasks():
     return render_template(
         'tasks.html',
+        username=session['name'],
         form=AddTaskForm(request.form),
         open_tasks=open_tasks(),
         closed_tasks=closed_tasks()
@@ -79,7 +81,8 @@ def new_task():
 @login_required
 def complete(task_id):
     task = db.session.query(Task).filter_by(task_id=task_id)
-    if session['user_id'] == task.first().user_id or session['role'] == 'admin':
+    if session['user_id'] == task.first().user_id \
+            or session['role'] == 'admin':
         task.update({"status": "0"})
         db.session.commit()
         flash('The task is complete. Nice.')
@@ -94,7 +97,8 @@ def complete(task_id):
 @login_required
 def delete_entry(task_id):
     task = db.session.query(Task).filter_by(task_id=task_id)
-    if session['user_id'] == task.first().user_id or session['role'] == 'admin':
+    if session['user_id'] == task.first().user_id \
+            or session['role'] == 'admin':
         task.delete()
         db.session.commit()
         flash('The task was deleted. Why not add a new one?')

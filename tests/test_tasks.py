@@ -71,7 +71,9 @@ class TasksTests(AllTests):
 
         self.create_user('Fletcher', 'fletcher@realpython.com', 'python101')
         self.login('Fletcher', 'python101')
-        self.app.get('tasks/', follow_redirects=True)
+        response = self.app.get('tasks/', follow_redirects=True)
+        self.assertNotIn(b'Mark as Complete', response.data)
+
         response = self.app.get("complete/1/", follow_redirects=True)
         self.assertNotIn(b'The task is complete. Nice.', response.data)
         self.assertIn(
@@ -88,7 +90,10 @@ class TasksTests(AllTests):
 
         self.create_user('Fletcher', 'fletcher@realpython.com', 'python101')
         self.login('Fletcher', 'python101')
-        self.app.get('tasks/', follow_redirects=True)
+        response = self.app.get('tasks/', follow_redirects=True)
+
+        self.assertNotIn(b'Delete', response.data)
+
         response = self.app.get("delete/1/", follow_redirects=True)
         self.assertNotIn(
             b'The task was deleted. Why not add a new one?',
@@ -109,6 +114,11 @@ class TasksTests(AllTests):
         self.create_admin_user('Superman', 'super@super.com', 'allpowerful')
         self.login('Superman', 'allpowerful')
         self.app.get('tasks/', follow_redirects=True)
+
+        response = self.create_task()
+        self.assertIn(b'complete/1/', response.data)
+        self.assertIn(b'complete/2/', response.data)
+
         response = self.app.get("complete/1/", follow_redirects=True)
         self.assertNotIn(
             'You can only update tasks that belong to you.',
@@ -125,11 +135,17 @@ class TasksTests(AllTests):
         self.create_admin_user('Superman', 'super@super.com', 'allpowerful')
         self.login('Superman', 'allpowerful')
         self.app.get('tasks/', follow_redirects=True)
+
+        response = self.create_task()
+        self.assertIn(b'delete/1/', response.data)
+        self.assertIn(b'delete/2/', response.data)
+
         response = self.app.get("delete/1/", follow_redirects=True)
         self.assertNotIn(
             'You can only delete tasks that belong to you.',
             response.data
         )
+
 
 if __name__ == "__main__":
     unittest.main()

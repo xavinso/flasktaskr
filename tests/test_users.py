@@ -81,5 +81,14 @@ class UsersTests(AllTests):
         for user in users:
             self.assertEquals(user.role, 'user')
 
+    def test_display_user_name(self):
+        self.register(
+            'Fletcher', 'fletcher@realpython.com',
+            'python101', 'python101'
+        )
+        self.login('Fletcher', 'python101')
+        response = self.app.get('tasks/', follow_redirects=True)
+        self.assertIn(b'Fletcher', response.data)
+
 if __name__ == "__main__":
     unittest.main()
