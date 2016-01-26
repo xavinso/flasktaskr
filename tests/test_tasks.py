@@ -121,7 +121,7 @@ class TasksTests(AllTests):
 
         response = self.app.get("complete/1/", follow_redirects=True)
         self.assertNotIn(
-            'You can only update tasks that belong to you.',
+            b'You can only update tasks that belong to you.',
             response.data
         )
 
@@ -142,7 +142,7 @@ class TasksTests(AllTests):
 
         response = self.app.get("delete/1/", follow_redirects=True)
         self.assertNotIn(
-            'You can only delete tasks that belong to you.',
+            b'You can only delete tasks that belong to you.',
             response.data
         )
 

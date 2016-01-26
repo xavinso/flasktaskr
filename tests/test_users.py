@@ -77,7 +77,6 @@ class UsersTests(AllTests):
         )
         self.db.session.commit()
         users = self.db.session.query(self.User).all()
-        print users
         for user in users:
             self.assertEquals(user.role, 'user')
 
